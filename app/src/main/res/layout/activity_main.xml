@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.tee.teepropose.MainActivity">
 
-    <com.example.examplemoveableview.MovableImageView
+    <com.tee.teepropose.MovableImageView
         android:id="@+id/view_left"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -14,7 +14,7 @@
         android:background="#d2d2a3"
         android:src="@mipmap/ic_launcher"/>
 
-    <com.example.examplemoveableview.MovableImageView
+    <com.tee.teepropose.MovableImageView
         android:id="@+id/view_right"
         android:layout_width="100dp"
         android:layout_height="100dp"
