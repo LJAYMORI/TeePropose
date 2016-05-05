@@ -1,13 +1,22 @@
 package com.tee.teepropose;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+
+@EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    @AfterInject
+    void initObject() {
+
     }
+
+    @AfterViews
+    void initView() {
+
+    }
+
 }
