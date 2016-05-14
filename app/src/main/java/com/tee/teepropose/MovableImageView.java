@@ -2,7 +2,6 @@ package com.tee.teepropose;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
@@ -42,7 +41,12 @@ public class MovableImageView extends ImageView {
                 setTranslationX(dx);
                 setTranslationY(dy);
 
-                Log.d("action__move", "ev.getRawX : " + event.getRawX() + ", ev.getRawY : " + event.getRawY());
+                if (mMoveListener != null) {
+//                    int x = (int) getX();
+//                    int y = (int) getY();
+//                    mMoveListener.onMoving(getId(), x, y, x + getWidth(), y + getHeight());
+                    mMoveListener.onMoving(getId(), (int)event.getRawX(), (int)event.getRawY(), (int)event.getRawX(), (int)event.getRawY());
+                }
 
                 break;
             }
@@ -61,7 +65,7 @@ public class MovableImageView extends ImageView {
     }
 
     public interface OnMoveListener {
-        void onMoving(int sx, int sy, int dx, int dy);
+        void onMoving(int viewID, int sx, int sy, int dx, int dy);
     }
     private OnMoveListener mMoveListener;
     public void setOnMoveListener(OnMoveListener listener) {
