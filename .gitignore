@@ -31,6 +31,10 @@ proguard/
 # Android Studio captures folder
 captures/
 
-# ETC
-.idea/
-app/app.iml
+
+# Android Studio
+*.iml
+.idea
+
+#NDK
+obj/
