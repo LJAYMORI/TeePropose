@@ -4,6 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+
+
+@EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
 
     private float edgeStartX;
@@ -59,4 +65,15 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    @AfterInject
+    void initObject() {
+
+    }
+
+    @AfterViews
+    void initView() {
+
+    }
+
 }
