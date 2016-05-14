@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tee.teepropose.ImagesActivity">
+
+    <ImageView
+        android:id="@+id/image_first"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        android:background="#dad3a1"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/image_third"
+        android:layout_alignStart="@+id/image_third" />
+
+    <ImageView
+        android:id="@+id/image_second"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        android:background="#dab1b0"
+        android:layout_alignTop="@+id/image_first"
+        android:layout_alignLeft="@+id/image_fifth"
+        android:layout_alignStart="@+id/image_fifth" />
+
+    <ImageView
+        android:id="@+id/image_third"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        android:background="#b1dab0"
+        android:layout_marginLeft="90dp"
+        android:layout_marginStart="90dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="32dp" />
+
+    <ImageView
+        android:id="@+id/image_fourth"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        android:background="#b0b1da"
+        android:layout_below="@+id/image_first"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/image_fifth"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        android:background="#efbba2"
+        android:layout_alignTop="@+id/image_third"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="90dp"
+        android:layout_marginEnd="90dp" />
+
+</RelativeLayout>
