@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,10 +16,10 @@ import java.util.List;
  */
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ImageViewHolder> {
 
-    List<Integer> mItems = new ArrayList<>();
+    List<ImageListData> mItems = new ArrayList<>();
 
-    public void addItems(Integer... resources) {
-        Collections.addAll(mItems, resources);
+    public void addItems(ImageListData... data) {
+        Collections.addAll(mItems, data);
         notifyDataSetChanged();
     }
 
@@ -30,7 +31,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
 
     @Override
     public void onBindViewHolder(ImageViewHolder holder, int position) {
-        holder.bind(position);
+        holder.bind(mItems.get(position), position);
     }
 
     @Override
@@ -39,20 +40,19 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
     }
 
     public class ImageViewHolder extends RecyclerView.ViewHolder {
-
         ImageView imageView;
+        TextView descriptionView;
 
         public ImageViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.image_item);
+            descriptionView = (TextView) itemView.findViewById(R.id.item_text);
         }
 
-        public void bind(int position) {
-            if (position % 2 == 0) {
-                itemView.setRotation(10f);
-            } else {
-                itemView.setRotation(-10f);
-            }
+        public void bind(ImageListData data, int position) {
+            itemView.setRotation(position % 2 == 0 ? 10f : -10f);
+            imageView.setImageResource(data.imageResource);
+            descriptionView.setText(data.description);
         }
     }
 }

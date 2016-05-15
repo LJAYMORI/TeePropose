@@ -31,7 +31,15 @@ public class ImagesActivity extends AppCompatActivity {
         mAdapter = new ImageListAdapter();
         recyclerView.setAdapter(mAdapter);
 
-        mAdapter.addItems(0, 0, 0, 0, 0, 0, 0, 0);
+        mAdapter.addItems(
+                new ImageListData(R.mipmap.ic_launcher, "티 프로포즈"),
+                new ImageListData(R.mipmap.ic_launcher, "티 프로포즈"),
+                new ImageListData(R.mipmap.ic_launcher, "티 프로포즈"),
+                new ImageListData(R.mipmap.ic_launcher, "티 프로포즈"),
+                new ImageListData(R.mipmap.ic_launcher, "티 프로포즈"),
+                new ImageListData(R.mipmap.ic_launcher, "티 프로포즈"),
+                new ImageListData(R.mipmap.ic_launcher, "티 프로포즈"),
+                new ImageListData(R.mipmap.ic_launcher, "티 프로포즈"));
 
         Runnable r = new Runnable() {
             @Override
@@ -44,6 +52,5 @@ public class ImagesActivity extends AppCompatActivity {
         };
 
         recyclerView.post(r);
-
     }
 }
