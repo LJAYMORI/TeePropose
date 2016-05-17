@@ -2,6 +2,7 @@ package com.tee.teepropose;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
@@ -9,11 +10,20 @@ import android.widget.ImageView;
  * Created by Jonguk on 2016. 5. 5..
  */
 public class MovableImageView extends ImageView {
+    long saveTime;
+    long currTime;
+    long delayTime = 500;
     private float mFirstEventX;
     private float mFirstEventY;
+    private OnMoveListener mMoveListener;
+
+    private boolean isWait = false;
+    private OnStopListener mStopListener;
 
     public MovableImageView(Context context) {
+
         this(context, null, 0);
+
     }
 
     public MovableImageView(Context context, AttributeSet attrs) {
@@ -38,14 +48,22 @@ public class MovableImageView extends ImageView {
                 final float dx = event.getRawX() - mFirstEventX;
                 final float dy = event.getRawY() - mFirstEventY;
 
+
                 setTranslationX(dx);
                 setTranslationY(dy);
+
 
                 if (mMoveListener != null) {
 //                    int x = (int) getX();
 //                    int y = (int) getY();
 //                    mMoveListener.onMoving(getId(), x, y, x + getWidth(), y + getHeight());
-                    mMoveListener.onMoving(getId(), (int)event.getRawX(), (int)event.getRawY(), (int)event.getRawX(), (int)event.getRawY());
+
+                    Log.d("dx:", String.valueOf(dx));
+                    Log.d("dy:", String.valueOf(dy));
+
+                    mMoveListener.onMoving(getId(), (int) event.getRawX(), (int) event.getRawY(), (int) event.getRawX(), (int) event.getRawY());
+
+
                 }
 
                 break;
@@ -58,17 +76,28 @@ public class MovableImageView extends ImageView {
                 setTranslationY(0);
 
                 layout((int) x, (int) y, (int) (x + getWidth()), (int) (y + getHeight()));
+                mStopListener.onStop();
                 break;
             }
         }
         return true;
     }
 
-    public interface OnMoveListener {
-        void onMoving(int viewID, int sx, int sy, int dx, int dy);
-    }
-    private OnMoveListener mMoveListener;
+
     public void setOnMoveListener(OnMoveListener listener) {
         mMoveListener = listener;
     }
+
+    public void setOnStopListener(OnStopListener listener) {
+        mStopListener = listener;
+    }
+
+    public interface OnMoveListener {
+        void onMoving(int viewID, int sx, int sy, int dx, int dy);
+    }
+
+    public interface OnStopListener {
+        void onStop();
+    }
+
 }
