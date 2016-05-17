@@ -76,7 +76,7 @@ public class MovableImageView extends ImageView {
                 setTranslationY(0);
 
                 layout((int) x, (int) y, (int) (x + getWidth()), (int) (y + getHeight()));
-                mStopListener.onStop();
+                mStopListener.onStop((int) event.getRawX(), (int) event.getRawY());
                 break;
             }
         }
@@ -97,7 +97,7 @@ public class MovableImageView extends ImageView {
     }
 
     public interface OnStopListener {
-        void onStop();
+        void onStop(int x, int y);
     }
 
 }

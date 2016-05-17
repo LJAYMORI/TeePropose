@@ -1,10 +1,14 @@
 package com.tee.teepropose;
 
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -25,8 +29,19 @@ public class MainActivity extends AppCompatActivity {
     MovableImageView rightView;
     @ViewById(R.id.vg_main)
     RelativeLayout vgMain;
+    @ViewById(R.id.edge)
+    ImageView emptyHeart;
+    @ViewById(R.id.iv_full_heart)
+    ImageView fullHeart;
+    @ViewById(R.id.edge_left)
+    ImageView edgeLeft;
+    @ViewById(R.id.edge_right)
+    ImageView edgeRight;
 
     boolean isAnim = false;
+    SoundPool soundPool;
+    int dalkak;
+    int heartbeat;
     private float edgeStartX;
     private float edgeStartY;
     private float edgeEndX;
@@ -34,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isWait;
     private long saveTime;
     private long currTime;
+    private boolean isMakeHalf = false;
 
     @Override
     protected void onResume() {
@@ -92,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
     @AfterViews
     void initView() {
 
+        soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 1);
+        dalkak = soundPool.load(this, R.raw.dalkak, 1);
+        heartbeat = soundPool.load(this, R.raw.heartbeat, 1);
         final ImageView[] imageViews = new ImageView[6];
 
         for (int i = 0; i < 6; i++) {
@@ -110,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
                 final int fDx = dx;
                 final int fDy = dy;
 
+                Log.e("sx", sx + "");
+                Log.e("sy", sy + "");
+
                 for (int i = 0; i < 3; i++) {
                     imageViews[i].setVisibility(View.VISIBLE);
                     final int index = i;
@@ -120,6 +142,9 @@ public class MainActivity extends AppCompatActivity {
                     final int rand1 = Math.abs(random.nextInt() % 700);
                     imageViews[index].setTranslationY(fDy - rand1);
                 }
+
+                Log.e("edgeLeft", edgeLeft.getX() + "");
+                Log.e("edgeRight", edgeLeft.getY() + "");
             }
         };
 
@@ -131,6 +156,9 @@ public class MainActivity extends AppCompatActivity {
                 final int fDx = dx;
                 final int fDy = dy;
 
+                Log.e("sx", sx + "");
+                Log.e("sy", sy + "");
+
                 for (int i = 3; i < 6; i++) {
                     imageViews[i].setVisibility(View.VISIBLE);
                     final int index = i;
@@ -141,23 +169,46 @@ public class MainActivity extends AppCompatActivity {
                     final int rand1 = Math.abs(random.nextInt() % 700);
                     imageViews[index].setTranslationY(fDy - rand1);
                 }
+
             }
         };
 
         MovableImageView.OnStopListener stopListener = new MovableImageView.OnStopListener() {
             @Override
-            public void onStop() {
+            public void onStop(int x, int y) {
                 for (int i = 0; i < 3; i++) {
                     imageViews[i].setVisibility(View.INVISIBLE);
                 }
+                if ((x > 480 && x < 570) && (y > 450 && y < 550)) {
+                    if (!isMakeHalf) {
+                        showLeftHeart();
+                        isMakeHalf = true;
+                        soundPool.play(dalkak, 1, 1, 0, 0, 1);
+                    } else {
+                        showHeart();
+                        soundPool.play(heartbeat, 1, 1, 0, 0, 1);
+                    }
+                }
+
             }
         };
 
         MovableImageView.OnStopListener stopListener2 = new MovableImageView.OnStopListener() {
             @Override
-            public void onStop() {
+            public void onStop(int x, int y) {
                 for (int i = 3; i < 6; i++) {
                     imageViews[i].setVisibility(View.INVISIBLE);
+                }
+
+                if ((x > 630 && x < 720) && (y > 480 && y < 570)) {
+                    if (!isMakeHalf) {
+                        showRightHeart();
+                        isMakeHalf = true;
+                        soundPool.play(dalkak, 1, 1, 0, 0, 1);
+                    } else {
+                        showHeart();
+                        soundPool.play(heartbeat, 1, 1, 0, 0, 1);
+                    }
                 }
             }
         };
@@ -166,6 +217,56 @@ public class MainActivity extends AppCompatActivity {
         rightView.setOnMoveListener(moveListener2);
         leftView.setOnStopListener(stopListener);
         rightView.setOnStopListener(stopListener2);
+
+        initHeart();
+    }
+
+    void initHeart() {
+        emptyHeart.setVisibility(View.VISIBLE);
+        fullHeart.setVisibility(View.INVISIBLE);
+        edgeLeft.setVisibility(View.INVISIBLE);
+        edgeRight.setVisibility(View.INVISIBLE);
+    }
+
+    void showLeftHeart() {
+        fullHeart.setVisibility(View.INVISIBLE);
+        edgeLeft.setVisibility(View.VISIBLE);
+        edgeRight.setVisibility(View.INVISIBLE);
+        leftView.setVisibility(View.INVISIBLE);
+    }
+
+    void showRightHeart() {
+        fullHeart.setVisibility(View.INVISIBLE);
+        edgeRight.setVisibility(View.VISIBLE);
+        edgeLeft.setVisibility(View.INVISIBLE);
+        rightView.setVisibility(View.INVISIBLE);
+    }
+
+    void showHeart() {
+        edgeLeft.setVisibility(View.INVISIBLE);
+        edgeRight.setVisibility(View.INVISIBLE);
+        fullHeart.setVisibility(View.VISIBLE);
+        edgeRight.setVisibility(View.INVISIBLE);
+        emptyHeart.setVisibility(View.INVISIBLE);
+        leftView.setVisibility(View.INVISIBLE);
+        rightView.setVisibility(View.INVISIBLE);
+        // Scaling
+        Animation scale = new ScaleAnimation(1, 1.5f, 1f, 1.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        scale.setRepeatCount(-1);
+// 1 second duration
+        scale.setDuration(1000);
+// Moving up
+//        Animation slideUp = new TranslateAnimation(fromX, toX, fromY, toY);
+// 1 second duration
+//        slideUp.setDuration(1000);
+// Animation set to join both scaling and moving
+        AnimationSet animSet = new AnimationSet(true);
+        animSet.setFillEnabled(true);
+        animSet.addAnimation(scale);
+//        animSet.addAnimation(slideUp);
+// Launching animation set
+        fullHeart.startAnimation(animSet);
     }
 
 }
