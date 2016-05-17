@@ -10,20 +10,14 @@ import android.widget.ImageView;
  * Created by Jonguk on 2016. 5. 5..
  */
 public class MovableImageView extends ImageView {
-    long saveTime;
-    long currTime;
-    long delayTime = 500;
+
     private float mFirstEventX;
     private float mFirstEventY;
     private OnMoveListener mMoveListener;
-
-    private boolean isWait = false;
     private OnStopListener mStopListener;
 
     public MovableImageView(Context context) {
-
         this(context, null, 0);
-
     }
 
     public MovableImageView(Context context, AttributeSet attrs) {
@@ -54,9 +48,6 @@ public class MovableImageView extends ImageView {
 
 
                 if (mMoveListener != null) {
-//                    int x = (int) getX();
-//                    int y = (int) getY();
-//                    mMoveListener.onMoving(getId(), x, y, x + getWidth(), y + getHeight());
 
                     Log.d("dx:", String.valueOf(dx));
                     Log.d("dy:", String.valueOf(dy));

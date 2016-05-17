@@ -21,7 +21,6 @@ public class ImagesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_images);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 

@@ -5,7 +5,6 @@ import android.media.SoundPool;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
@@ -14,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
@@ -42,18 +42,12 @@ public class MainActivity extends AppCompatActivity {
     SoundPool soundPool;
     int dalkak;
     int heartbeat;
-    private float edgeStartX;
-    private float edgeStartY;
-    private float edgeEndX;
-    private float edgeEndY;
-    private boolean isWait;
-    private long saveTime;
-    private long currTime;
     private boolean isMakeHalf = false;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+
+    @Click(R.id.iv_full_heart)
+    void clickHeart() {
+        ImagesActivity_.intent(this).start();
     }
 
     public ImageView getImageView() {
@@ -89,22 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    Animation getAnimation() {
-        Animation anim = new AlphaAnimation(0.0f, 1.0f);
-        Random random = new Random();
-        int rand = random.nextInt() % 200;
-        rand = Math.abs(rand);
-        if (rand < 100) {
-            rand = 100 + rand;
-        }
-        anim.setDuration(500);
-        anim.setStartOffset(20);
-        anim.setRepeatMode(Animation.REVERSE);
-        anim.setRepeatCount(Animation.INFINITE);
-        return anim;
-
-    }
-
     @AfterViews
     void initView() {
 
@@ -115,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < 6; i++) {
             ImageView imageView = getImageView();
-//            imageView.startAnimation(getAnimation());
             imageViews[i] = imageView;
             imageView.setVisibility(View.INVISIBLE);
         }
@@ -250,22 +227,13 @@ public class MainActivity extends AppCompatActivity {
         emptyHeart.setVisibility(View.INVISIBLE);
         leftView.setVisibility(View.INVISIBLE);
         rightView.setVisibility(View.INVISIBLE);
-        // Scaling
         Animation scale = new ScaleAnimation(1, 1.5f, 1f, 1.5f,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         scale.setRepeatCount(-1);
-// 1 second duration
         scale.setDuration(1000);
-// Moving up
-//        Animation slideUp = new TranslateAnimation(fromX, toX, fromY, toY);
-// 1 second duration
-//        slideUp.setDuration(1000);
-// Animation set to join both scaling and moving
         AnimationSet animSet = new AnimationSet(true);
         animSet.setFillEnabled(true);
         animSet.addAnimation(scale);
-//        animSet.addAnimation(slideUp);
-// Launching animation set
         fullHeart.startAnimation(animSet);
     }
 
