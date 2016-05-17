@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         Random random = new Random();
         int rand = random.nextInt() % 30;
         rand = Math.abs(rand);
-        if (rand < 10) {
-            rand = 10 + rand;
+        if (rand < 30) {
+            rand = 30 + rand;
         }
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(rand, rand);
         imageView.setLayoutParams(layoutParams);
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < 3; i++) {
                     imageViews[i].setVisibility(View.INVISIBLE);
                 }
-                if ((x > 480 && x < 570) && (y > 450 && y < 550)) {
+                if ((x > 450 && x < 580) && (y > 430 && y < 580)) {
                     if (!isMakeHalf) {
                         showLeftHeart();
                         isMakeHalf = true;
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                     imageViews[i].setVisibility(View.INVISIBLE);
                 }
 
-                if ((x > 630 && x < 720) && (y > 480 && y < 570)) {
+                if ((x > 630 && x < 720) && (y > 450 && y < 600)) {
                     if (!isMakeHalf) {
                         showRightHeart();
                         isMakeHalf = true;
