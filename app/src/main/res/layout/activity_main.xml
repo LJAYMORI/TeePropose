@@ -4,42 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d2d2d3"
+    android:id="@+id/vg_main"
     tools:context="com.tee.teepropose.MainActivity">
 
     <ImageView
         android:id="@+id/edge"
         android:layout_width="160dp"
         android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
         android:scaleType="fitXY"
-        android:src="@drawable/heart_edge"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:src="@drawable/heart_edge" />
 
     <com.tee.teepropose.MovableImageView
         android:id="@+id/view_left"
         android:layout_width="80dp"
         android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:scaleType="fitXY"
-        android:src="@drawable/heart_left_2"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/heart_left_2" />
 
     <com.tee.teepropose.MovableImageView
         android:id="@+id/view_right"
         android:layout_width="80dp"
         android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:scaleType="fitXY"
-        android:src="@drawable/heart_right_2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
         android:layout_marginRight="60dp"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/heart_right_2" />
+
+
 
 </RelativeLayout>
