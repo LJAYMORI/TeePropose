@@ -1,6 +1,6 @@
 package com.tee.teepropose;
 
-import android.media.MediaPlayer;
+import android.content.Intent;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -34,19 +34,18 @@ public class ImagesActivity extends AppCompatActivity {
         mAdapter = new ImageListAdapter();
         recyclerView.setAdapter(mAdapter);
 
-
         mAdapter.addItems(
-                new ImageListData(R.mipmap.p1, "티 프로포즈"),
-                new ImageListData(R.mipmap.p2, "티 프로포즈"),
-                new ImageListData(R.mipmap.p3, "티 프로포즈"),
-                new ImageListData(R.mipmap.p4, "티 프로포즈"),
-                new ImageListData(R.mipmap.p5, "티 프로포즈"),
-                new ImageListData(R.mipmap.p6, "티 프로포즈"),
-                new ImageListData(R.mipmap.p7, "티 프로포즈"),
-                new ImageListData(R.mipmap.p8, "티 프로포즈"),
-                new ImageListData(R.mipmap.p9, "티 프로포즈"),
-                new ImageListData(R.mipmap.p10, "티 프로포즈"),
-                new ImageListData(R.mipmap.p11, "티 프로포즈")
+                new ImageListData(R.mipmap.p1, "10년간"),
+                new ImageListData(R.mipmap.p2, "지켜온"),
+                new ImageListData(R.mipmap.p3, "우리의"),
+                new ImageListData(R.mipmap.p4, "사랑을"),
+                new ImageListData(R.mipmap.p5, "자축하고"),
+                new ImageListData(R.mipmap.p6, "기억하고"),
+                new ImageListData(R.mipmap.p7, "추억하며"),
+                new ImageListData(R.mipmap.p8, "우리가"),
+                new ImageListData(R.mipmap.p9, "하나되기 전"),
+                new ImageListData(R.mipmap.p10, "마지막"),
+                new ImageListData(R.mipmap.p11, "편지")
         );
 
         Runnable r = new Runnable() {
@@ -57,6 +56,7 @@ public class ImagesActivity extends AppCompatActivity {
                     recyclerView.postDelayed(this, 100);
                 } else {
                     LetterActivity_.intent(ImagesActivity.this).start();
+                    finish();
                 }
             }
         };
@@ -68,11 +68,9 @@ public class ImagesActivity extends AppCompatActivity {
 
     @Background
     void playMusic() {
-        MediaPlayer mediaPlayer
-                = MediaPlayer.create(this, R.raw.bgm);
-        mediaPlayer.start();
+        Intent bgmService = new Intent(this, BGMService.class);
+        startService(bgmService);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -41,7 +41,7 @@ public class LetterListAdapter extends RecyclerView.Adapter<LetterListAdapter.Le
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0 || position == getItemCount() - 1) {
+        if (position == 0/* || position == getItemCount() - 1*/) {
             return 0;
         } else {
             return 1;

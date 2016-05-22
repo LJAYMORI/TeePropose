@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                         vibe.vibrate(200);
 
+                        clickHeart();
                     }
                 });
 
@@ -190,10 +191,12 @@ public class MainActivity extends AppCompatActivity {
         MovableImageView.OnStopListener stopListener = new MovableImageView.OnStopListener() {
             @Override
             public void onStop(int x, int y) {
+                Log.d("stopX", x+"" );
+                Log.d("stopY", y+"" );
                 for (int i = 0; i < 3; i++) {
                     imageViews[i].setVisibility(View.INVISIBLE);
                 }
-                if ((x > 780 && x < 900) && (y > 740 && y < 850)) {
+                if ((x > 750 && x < 950) && (y > 650 && y < 850)) {
                     if (!isMakeHalf) {
                         showLeftHeart();
                         isMakeHalf = true;
@@ -214,7 +217,10 @@ public class MainActivity extends AppCompatActivity {
                     imageViews[i].setVisibility(View.INVISIBLE);
                 }
 
-                if ((x > 950 && x < 1050) && (y > 650 && y < 850)) {
+                Log.d("stopX2", x+"" );
+                Log.d("stopY2", y+"" );
+
+                if ((x > 950 && x < 1100) && (y > 700 && y < 850)) {
                     if (!isMakeHalf) {
                         showRightHeart();
                         isMakeHalf = true;

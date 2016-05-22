@@ -1,15 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/picture3"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#aaffffff" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp" />
+        android:paddingLeft="80dp" />
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/forever"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="영원히"
+            android:textColor="#000"
+            android:textSize="32sp"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/iloveyou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12sp"
+            android:text="사랑해"
+            android:textColor="#000"
+            android:textSize="32sp"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
+
+</FrameLayout>

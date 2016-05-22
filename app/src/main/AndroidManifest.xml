@@ -27,6 +27,9 @@
             android:name=".LetterActivity_"
             android:screenOrientation="landscape" />
 
+        <!-- BGM play service -->
+        <service android:name=".BGMService" />
+
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
