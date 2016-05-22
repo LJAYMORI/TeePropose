@@ -20,10 +20,15 @@
         <!-- Images layout -->
         <activity
             android:name=".ImagesActivity_"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" />
 
-        </activity>
+        <!-- Letter Layout -->
+        <activity
+            android:name=".LetterActivity_"
+            android:screenOrientation="landscape" />
 
     </application>
+
+    <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
 
 </manifest>

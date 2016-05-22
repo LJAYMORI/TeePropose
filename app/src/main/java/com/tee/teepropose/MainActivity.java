@@ -1,7 +1,11 @@
 package com.tee.teepropose;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -41,13 +45,46 @@ public class MainActivity extends AppCompatActivity {
     boolean isAnim = false;
     SoundPool soundPool;
     int dalkak;
-    int heartbeat;
+    int bbo;
     private boolean isMakeHalf = false;
 
 
     @Click(R.id.iv_full_heart)
     void clickHeart() {
-        ImagesActivity_.intent(this).start();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);     // 여기서 this는 Activity의 this
+
+
+
+// 여기서 부터는 알림창의 속성 설정
+        builder.setTitle("Tee Propose")        // 제목 설정
+                .setMessage("청혼을 수락하겠습니까")        // 메세지 설정
+                .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    // 확인 버튼 클릭시 설정
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        ImagesActivity_.intent(MainActivity.this).startForResult(0);
+                        soundPool.stop(dalkak);
+                        soundPool.stop(bbo);
+                        soundPool.release();
+                        finish();
+                    }
+                })
+                .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    // 취소 버튼 클릭시 설정
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                        vibe.vibrate(200);
+
+                    }
+                });
+
+
+        AlertDialog dialog = builder.create();    // 알림창 객체 생성
+
+        dialog.show();    // 알림창 띄우기
+
+
     }
 
     public ImageView getImageView() {
@@ -88,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
         soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 1);
         dalkak = soundPool.load(this, R.raw.dalkak, 1);
-        heartbeat = soundPool.load(this, R.raw.heartbeat, 1);
+        bbo = soundPool.load(this, R.raw.bbo, 1);
         final ImageView[] imageViews = new ImageView[6];
 
         for (int i = 0; i < 6; i++) {
@@ -156,14 +193,14 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < 3; i++) {
                     imageViews[i].setVisibility(View.INVISIBLE);
                 }
-                if ((x > 450 && x < 580) && (y > 430 && y < 580)) {
+                if ((x > 780 && x < 900) && (y > 740 && y < 850)) {
                     if (!isMakeHalf) {
                         showLeftHeart();
                         isMakeHalf = true;
                         soundPool.play(dalkak, 1, 1, 0, 0, 1);
                     } else {
                         showHeart();
-                        soundPool.play(heartbeat, 1, 1, 0, 0, 1);
+                        soundPool.play(bbo, 1, 1, 0, 0, 1);
                     }
                 }
 
@@ -177,14 +214,14 @@ public class MainActivity extends AppCompatActivity {
                     imageViews[i].setVisibility(View.INVISIBLE);
                 }
 
-                if ((x > 630 && x < 720) && (y > 450 && y < 600)) {
+                if ((x > 950 && x < 1050) && (y > 650 && y < 850)) {
                     if (!isMakeHalf) {
                         showRightHeart();
                         isMakeHalf = true;
                         soundPool.play(dalkak, 1, 1, 0, 0, 1);
                     } else {
                         showHeart();
-                        soundPool.play(heartbeat, 1, 1, 0, 0, 1);
+                        soundPool.play(bbo, 1, 1, 0, 0, 1);
                     }
                 }
             }
@@ -236,5 +273,6 @@ public class MainActivity extends AppCompatActivity {
         animSet.addAnimation(scale);
         fullHeart.startAnimation(animSet);
     }
+
 
 }

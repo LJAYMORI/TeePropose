@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +33,13 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
 
     @Override
     public void onBindViewHolder(ImageViewHolder holder, int position) {
-        holder.bind(mItems.get(position), position);
+        holder.itemView.setRotation(position % 2 == 0 ? 10f : -10f);
+
+        Glide.with(holder.imageView.getContext())
+                .load(mItems.get(position).imageResource)
+                .into(holder.imageView);
+        holder.descriptionView.setText(mItems.get(position).description);
+
     }
 
     @Override
@@ -40,19 +48,13 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.Imag
     }
 
     public class ImageViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        TextView descriptionView;
+        public ImageView imageView;
+        public TextView descriptionView;
 
         public ImageViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.image_item);
             descriptionView = (TextView) itemView.findViewById(R.id.item_text);
-        }
-
-        public void bind(ImageListData data, int position) {
-            itemView.setRotation(position % 2 == 0 ? 10f : -10f);
-            imageView.setImageResource(data.imageResource);
-            descriptionView.setText(data.description);
         }
     }
 }

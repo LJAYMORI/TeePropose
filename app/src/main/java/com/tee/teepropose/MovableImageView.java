@@ -42,19 +42,15 @@ public class MovableImageView extends ImageView {
                 final float dx = event.getRawX() - mFirstEventX;
                 final float dy = event.getRawY() - mFirstEventY;
 
-
                 setTranslationX(dx);
                 setTranslationY(dy);
 
 
                 if (mMoveListener != null) {
-
                     Log.d("dx:", String.valueOf(dx));
                     Log.d("dy:", String.valueOf(dy));
 
                     mMoveListener.onMoving(getId(), (int) event.getRawX(), (int) event.getRawY(), (int) event.getRawX(), (int) event.getRawY());
-
-
                 }
 
                 break;
